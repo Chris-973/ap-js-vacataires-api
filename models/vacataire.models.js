@@ -11,9 +11,7 @@ const vacataireSchema = mongoose.Schema(
         // },
         // likers: {
         //     type: [String]
-        // },
-
-
+        // }
 
         name: {
             type: String,
