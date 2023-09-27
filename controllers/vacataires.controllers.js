@@ -6,13 +6,14 @@ module.exports.getVacataires = async (req, res) => {
 }
 
 module.exports.addVacataire = async(req, res) => {
-    if(!req.body.message) {
-        res.status(400).json({message: "Aucun message ! Ajoutez en un..."})
+    if(!req.body.name) {
+        res.status(400).json({name: "Aucun message ! Ajoutez en un..."})
     }
 
     const vacataire = await VacataireModel.create({
-        message: req.body.message,
-        author: req.body.author,
+        name: req.body.name,
+        lastName: req.body.lastName,
+        email: req.body.email,
     })
     res.status(200).json(vacataire)
 }
