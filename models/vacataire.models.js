@@ -15,11 +15,9 @@ const vacataireSchema = mongoose.Schema(
 
         name: {
             type: String,
-            required: true
         },
         lastName: {
             type: String,
-            required: true
         },
         email: {
             type: [String],
