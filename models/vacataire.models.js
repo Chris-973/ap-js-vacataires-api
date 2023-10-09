@@ -13,7 +13,7 @@ const vacataireSchema = mongoose.Schema(
             type: String,
         },
         email: {
-            type: [String],
+            type: String,
         },
         github: {
             type: String

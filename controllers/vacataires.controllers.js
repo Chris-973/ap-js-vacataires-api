@@ -11,11 +11,12 @@ module.exports.addVacataire = async(req, res) => {
     }
 
     const vacataire = await VacataireModel.create({
-        // message: req.body.message,
-        // author: req.body.author,
         name: req.body.name,
         lastName: req.body.lastName,
-        email: req.body.email
+        phone: req.body.phone,
+        email: req.body.email,
+        github: req.body.github,
+        skills: req.body.skills,
     })
     res.status(200).json(vacataire)
 }
