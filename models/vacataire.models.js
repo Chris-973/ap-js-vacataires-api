@@ -4,26 +4,28 @@ const vacataireSchema = mongoose.Schema(
     {
         name: {
             type: String,
-            // required: true
-        },
-        lastName: {
+          },
+          lastName: {
+              type: String,
+          },
+          phone: {
+              type: String
+          },
+          email: {
             type: String,
-        },
-        phone: {
-            type: String,
-        },
-        email: {
-            type: String,
-        },
-        github: {
+          },
+          github: {
             type: String
-        },
-        skills: {
-            type: String
-        },
-        modules: {
-            type: String
-        }
+          },
+          skills: {
+            type: [String]
+          },
+          modules: {
+            type: [String]
+          },
+          status: {
+              type: String,
+          },
     }
 )
 

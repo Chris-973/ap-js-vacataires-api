@@ -21,4 +21,4 @@ app.use("/vacataires", require("./routes/vacataires.routes"));
 // Lancer le serveur
 app.listen(port, () => console.log("Le serveur a démarré au port  " + port));
 
-console.log(process.env.DB_URI);
+console.log("Process Env : " + process.env.DB_URI);
