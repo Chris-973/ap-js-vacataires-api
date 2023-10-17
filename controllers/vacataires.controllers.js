@@ -21,6 +21,18 @@ module.exports.addVacataire = async(req, res) => {
     res.status(200).json(vacataire)
 }
 
+module.exports.newVacataire = async(req, res) => {
+    const vacataire = await VacataireModel.create({
+        name: req.nody.name,
+        lastName: req.body.lastName,
+        phone: req.body.phone,
+        email: req.body.email,
+        github: req.body.github,
+        skills: req.body.skills,
+    })
+    res.status(200).json(vacataire)
+}
+
 module.exports.editVacataire = async (req, res) => {
     const vacataire = await VacataireModel.findById(req.params.id)
 

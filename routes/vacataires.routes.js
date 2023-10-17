@@ -1,10 +1,10 @@
 const express = require("express")
-const { getVacataires, addVacataire, editVacataire, deleteVacataire, affecteVacataire, desaffecteVacataire } = require("../controllers/vacataires.controllers")
+const { getVacataires, newVacataire, editVacataire, deleteVacataire, affecteVacataire, desaffecteVacataire } = require("../controllers/vacataires.controllers")
 const router = express.Router()
 
 router.get("/", getVacataires)
 
-router.post("/newVacataire", addVacataire)
+router.post("/newVacataire", newVacataire)
 
 router.put("/editVacataire/:id", editVacataire)
 
