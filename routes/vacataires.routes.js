@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get("/", getVacataires)
 
-router.post("/newVacataire", newVacataire)
+router.post("/addVacataire", newVacataire)
 
 router.put("/editVacataire/:id", editVacataire)
 
