@@ -22,7 +22,7 @@ module.exports.addVacataire = async(req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         github: req.body.github,
-        // skills: req.body.skills,
+        skills: req.body.skills,
         status: 'en attente'
     });
 

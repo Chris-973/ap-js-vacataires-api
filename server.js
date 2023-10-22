@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/vacataires", require("./routes/vacataires.routes"));
+app.use("/cours", require("./routes/cours.routes"));
 
 // Lancer le serveur
 app.listen(port, () => console.log("Le serveur a démarré au port  " + port));
