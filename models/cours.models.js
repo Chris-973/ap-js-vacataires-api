@@ -39,9 +39,6 @@ const coursSchema = mongoose.Schema({
     github: {
       type: String,
     },
-    skills: {
-      type: [String],
-    },
   },
   name: {
     type: String,
