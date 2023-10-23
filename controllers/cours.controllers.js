@@ -23,7 +23,7 @@ module.exports.addCours = async (req, res) => {
     color: req.body.color,
     group: req.body.group,
   };
-
+  
   if (req.body.vacataire) {
     coursData.vacataire = {
       firstName: req.body.vacataire.firstName,
@@ -31,7 +31,6 @@ module.exports.addCours = async (req, res) => {
       phone: req.body.vacataire.phone,
       email: req.body.vacataire.email,
       github: req.body.vacataire.github,
-      // skills: req.body.vacataire.skills,
       status: 'admis',
     };
   }
@@ -78,9 +77,4 @@ module.exports.disusedVacataire = async (req, res) => {
       message: "Aucun vacataire affecté",
     });
   }
-
-  console.log(cours.vacataire);
-
-  // await cours.vacataire.deleteOne({ _id: req.params.vacataire.id })
-  // res.status(200).json("vacataire désaffecté :" + cours.vacataire)
 };
