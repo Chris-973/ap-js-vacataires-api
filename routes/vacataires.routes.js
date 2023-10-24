@@ -10,7 +10,7 @@ router.put("/editVacataire/:id", editVacataire)
 
 router.delete("/deleteVacataire/:id", deleteVacataire)
 
-router.patch("/affecteVacataire/:id", affecteVacataire)
+router.put("/affecteVacataire/:id", affecteVacataire)
 
 router.patch("/desaffecteVacataire/:id", desaffecteVacataire)
 

@@ -12,4 +12,6 @@ router.delete("/deleteCours/:id", deleteCours)
 
 router.get("/disusedVacataire/:id", disusedVacataire)
 
+router.get("/disusedVacataire/:id", disusedVacataire)
+
 module.exports = router

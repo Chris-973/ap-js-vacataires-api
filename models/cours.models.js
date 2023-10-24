@@ -24,6 +24,9 @@ const vacataireSchema = mongoose.Schema({
 const coursSchema = mongoose.Schema({
   // vacataire: vacataireSchema,
   vacataire: {
+    _id: {
+      type: String
+    },
     firstName: {
       type: String,
     },

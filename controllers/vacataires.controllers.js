@@ -1,4 +1,5 @@
 const VacataireModel = require('../models/vacataire.models')
+const CoursModel = require('../models/cours.models')
 
 module.exports.getVacataires = async (req, res) => {
     const vacataire = await VacataireModel.find()
@@ -7,7 +8,7 @@ module.exports.getVacataires = async (req, res) => {
 
 module.exports.addVacataire = async(req, res) => {
     // Vérifie la présence des propriétés requises dans la requête
-    const requiredProperties = ['name', 'lastName', 'phone', 'email', 'github'];
+    const requiredProperties = ['firstName', 'lastName', 'phone', 'email', 'github'];
 
     for (const property of requiredProperties) {
         if (!req.body[property]) {
@@ -17,7 +18,7 @@ module.exports.addVacataire = async(req, res) => {
 
     // Crée le Vacataire uniquement si toutes les propriétés sont présentes
     const vacataire = await VacataireModel.create({
-        name: req.body.name,
+        firstName: req.body.firstName,
         lastName: req.body.lastName,
         phone: req.body.phone,
         email: req.body.email,
@@ -60,16 +61,34 @@ module.exports.deleteVacataire = async (req, res) => {
     res.status(200).json("Message supprimé " + vacataire)
 }
 
+// module.exports.affecteVacataire = async (req, res) => {
+//     try {
+//         await CoursModel.findByIdAndUpdate(
+//             req.params.id,
+//             {$addToSet: {vacataire: req.body._id}},
+//             {new: true }
+//         ).then((data) => res.status(200).send(data))
+//     } catch (err) {
+//         res.status(400).json(err)
+//     }
+// }
+
 module.exports.affecteVacataire = async (req, res) => {
-    try {
-        await VacataireModel.findByIdAndUpdate(
-            req.params.id,
-            {$addToSet: {likers: req.body.userId}},
-            {new: true }
-        ).then((data) => res.status(200).send(data))
-    } catch (err) {
-        res.status(400).json(err)
+    const cours = await CoursModel.findById(req.params.id)
+
+    if(!cours) {
+        res.status(400).json({
+            message: "Ce cours n'existe pas"
+        })
     }
+
+    const updateCours = await CoursModel.findByIdAndUpdate(
+        cours,
+        req.body    ,
+        {new: true}
+    )
+
+    res.status(200).json(updateCours)
 }
 
 module.exports.desaffecteVacataire = async (req, res) => {
