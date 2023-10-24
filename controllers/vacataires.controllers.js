@@ -61,20 +61,10 @@ module.exports.deleteVacataire = async (req, res) => {
     res.status(200).json("Message supprimé " + vacataire)
 }
 
-// module.exports.affecteVacataire = async (req, res) => {
-//     try {
-//         await CoursModel.findByIdAndUpdate(
-//             req.params.id,
-//             {$addToSet: {vacataire: req.body._id}},
-//             {new: true }
-//         ).then((data) => res.status(200).send(data))
-//     } catch (err) {
-//         res.status(400).json(err)
-//     }
-// }
-
 module.exports.affecteVacataire = async (req, res) => {
-    const cours = await CoursModel.findById(req.params.id)
+    const cours = await CoursModel.findById(
+        req.params.idCours
+    )
 
     if(!cours) {
         res.status(400).json({
@@ -82,13 +72,37 @@ module.exports.affecteVacataire = async (req, res) => {
         })
     }
 
-    const updateCours = await CoursModel.findByIdAndUpdate(
-        cours,
-        req.body    ,
-        {new: true}
-    )
+    if(cours.vacataire._id) {
+        res.status(400).json({
+            message: "Il y'a déjà un vacataire admis"
+        })
+    }
+    
+    try {
+        await CoursModel.findByIdAndUpdate(
+            req.params.idCours,
+            data = {
+                vacataire: req.body
+            },
+            // {$addToSet: {vacataire: req.body.vacataire}},
+            {new: true}
+        ).then((data) => res.status(200).send(data))
+    } catch (err) {
+        res.status(400).json(err)
+    }
 
-    res.status(200).json(updateCours)
+    try {
+        await VacataireModel.findByIdAndUpdate(
+            req.params.idVacataire,
+            data = {
+                status: 'admis'
+            },
+
+            {new: true}
+        ).then((data) => res.status(200).send(data))
+    } catch (err) {
+
+    }
 }
 
 module.exports.desaffecteVacataire = async (req, res) => {
