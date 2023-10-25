@@ -20,6 +20,9 @@ const vacataireSchema = mongoose.Schema(
     skills: {
       type: [String]
     },
+    cours: {
+
+    },
     status: {
       type: String
     }

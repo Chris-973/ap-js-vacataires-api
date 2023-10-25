@@ -74,27 +74,27 @@ module.exports.desaffecterVacataire = async (req, res) => {
   const idCours = req.params.idCours;
   const cours = await coursModel.findById(idCours);
 
-  const idVacataire = cours.vacataire._id;
-  const vacataire = await vacataireModels.findById(idVacataire);
-
   if (!cours) {
     return res.status(400).json({ erreur: 'Cours non trouvé' });
   }
 
-  if (!vacataire) {
-    return res.status(400).json({ erreur: 'Aucun vacataire affecter à ce cours' });
-  }
+  const vacataire = await vacataireModels.findById(cours.vacataire._id);
+  
 
+  
   try {
     
     cours.vacataire = {}
+    vacataire.cours = {}
+
     vacataire.status = 'non affecter'
 
     const coursModifie = await cours.save();
     const vacataireModifie = await vacataire.save();
 
     res.status(200).json({
-      cours: cours
+      cours: cours,
+      vacataire: vacataire
     });
   } catch(err) {
     res.status(400).json(err)

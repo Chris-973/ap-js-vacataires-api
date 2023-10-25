@@ -57,8 +57,16 @@ module.exports.deleteVacataire = async (req, res) => {
         })
     }
 
+
+    if(vacataire.status == 'affecter') {
+        return res.status(400).json({ err: 'le vacataire est affecter à un cours' }); 
+    }
+
     await vacataire.deleteOne({ _id: req.params.id })
-    res.status(200).json("Message supprimé " + vacataire)
+    res.status(200).json({
+        message: 'Vacataire supprimé',
+        vacataire: vacataire
+    })
 }
 
 module.exports.affecteVacataire = async (req, res) => {
@@ -95,6 +103,7 @@ module.exports.affecteVacataire = async (req, res) => {
         await VacataireModel.findByIdAndUpdate(
             req.params.idVacataire,
             data = {
+                cours: cours,
                 status: 'affecter'
             },
 
