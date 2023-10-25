@@ -95,24 +95,12 @@ module.exports.affecteVacataire = async (req, res) => {
         await VacataireModel.findByIdAndUpdate(
             req.params.idVacataire,
             data = {
-                status: 'admis'
+                status: 'affecter'
             },
 
             {new: true}
         ).then((data) => res.status(200).send(data))
     } catch (err) {
 
-    }
-}
-
-module.exports.desaffecteVacataire = async (req, res) => {
-    try {
-        await VacataireModel.findByIdAndUpdate(
-            req.params.id,
-            {$pull: {likers: req.body.userId}},
-            {new: true }
-        ).then((data) => res.status(200).send(data))
-    } catch (err) {
-        res.status(400).json(err)
     }
 }

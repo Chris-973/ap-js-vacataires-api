@@ -1,4 +1,5 @@
 const coursModel = require("../models/cours.models");
+const vacataireModels = require("../models/vacataire.models");
 
 module.exports.getCours = async (req, res) => {
   const cours = await coursModel.find();
@@ -69,12 +70,36 @@ module.exports.deleteCours = async (req, res) => {
   res.status(200).json("Cours supprimé :" + cours);
 };
 
-module.exports.disusedVacataire = async (req, res) => {
-  const cours = await coursModel.findById(req.params.id);
+module.exports.desaffecterVacataire = async (req, res) => {
+  const idCours = req.params.idCours;
+  const cours = await coursModel.findById(idCours);
 
-  if (!cours.vacataire) {
-    res.status(400).json({
-      message: "Aucun vacataire affecté",
-    });
+  const idVacataire = cours.vacataire._id;
+  const vacataire = await vacataireModels.findById(idVacataire);
+
+  if (!cours) {
+    return res.status(400).json({ erreur: 'Cours non trouvé' });
   }
+
+  if (!vacataire) {
+    return res.status(400).json({ erreur: 'Aucun vacataire affecter à ce cours' });
+  }
+
+  try {
+    
+    cours.vacataire = {}
+    vacataire.status = 'non affecter'
+
+    const coursModifie = await cours.save();
+    const vacataireModifie = await vacataire.save();
+
+    res.status(200).json({
+      cours: cours
+    });
+  } catch(err) {
+    res.status(400).json(err)
+  }
+
+
+
 };

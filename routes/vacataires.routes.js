@@ -12,6 +12,4 @@ router.delete("/deleteVacataire/:id", deleteVacataire)
 
 router.put("/affecteVacataire/:idCours/:idVacataire", affecteVacataire)
 
-router.patch("/desaffecteVacataire/:id", desaffecteVacataire)
-
 module.exports = router
